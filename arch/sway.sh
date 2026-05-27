@@ -29,7 +29,7 @@ PACKAGES=(
 
     # --- Look & Feel (GTK, Icons, Themes) ---
     lxappearance nwg-look materia-gtk-theme gnome-themes-extra 
-    gtk-engine-murrine papirus-icon-theme libadwaita
+    papirus-icon-theme libadwaita
 
     # --- Fonts ---
     otf-font-awesome noto-fonts-emoji ttf-croscore ttf-dejavu ttf-droid 
@@ -46,4 +46,4 @@ echo "Enabling and starting system services..."
 # Enable and start CUPS (Printing) in a single command
 sudo systemctl enable --now cups.service
 
-echo "Installation complete! You can now launch Sway via UWSM using: uwsm start sway-session"
+echo "Installation complete! You can now launch Sway via UWSM using: uwsm start sway (reboot may be required)"
