@@ -8,12 +8,11 @@ echo "Updating DNF repositories and installing Sway environment on Fedora..."
 # Organize Fedora packages into readable categories
 PACKAGES=(
     # --- Core Wayland & Sway ---
-    sway i3status autotiling python3-i3ipc wl-clipboard clipman
+    sway i3status python3-i3ipc wl-clipboard clipman
 
     # --- System Utilities & Daemons ---
     tar wget fuse fuse-libs usbutils avahi fastfetch htop fwupd
-    lxpolkit gnome-keyring gnome-keyring-pam seahorse
-    cups system-config-printer
+    lxpolkit cups system-config-printer
 
     # --- Audio, Video & Codec Groups ---
     @multimedia 
@@ -30,7 +29,7 @@ PACKAGES=(
     thunar thunar-volman thunar-archive-plugin tumbler tumbler-extras file-roller
 
     # --- Look & Feel (GTK, Icons, Themes) ---
-    lxappearance gnome-themes-extra papirus-icon-theme papirus-icon-theme-dark
+    lxappearance papirus-icon-theme papirus-icon-theme-dark
     
     # --- Launcher & Notifications ---
     fuzzel dunst
