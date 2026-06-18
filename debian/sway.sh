@@ -13,13 +13,13 @@ PACKAGES=(
     xwayland xdg-desktop-portal-gtk xdg-desktop-portal-wlr python3-i3ipc
 
     # --- System Utilities & Daemons ---
-    curl fwupd fastfetch lxpolkit libglib2.0-bin cups build-essential light
+    libfuse2t64 curl fwupd fastfetch lxpolkit libglib2.0-bin cups build-essential light
 
     # --- Audio, Media & Gaming ---
     pipewire-audio playerctl mpd mpv gamemode
 
     # --- Terminal & Shell Tools ---
-    foot
+    foot gh
 
     # --- Application Launcher & Notifications ---
     fuzzel dunst
