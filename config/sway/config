@@ -21,7 +21,7 @@ set $term foot
 set $menu fuzzel 
 
 ### Output configuration
-output * bg ~/builds/dotfiles/wallpaper/outrun.png fill mode 1920x1080@75Hz max_render_time 10
+output * bg ~/builds/dotfiles/wallpaper/outrun.png fill mode 1920x1080@75Hz max_render_time 8
 
 # Example configuration:
 #
