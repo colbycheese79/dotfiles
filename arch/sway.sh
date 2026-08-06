@@ -12,7 +12,7 @@ PACKAGES=(
     xorg-xwayland xdg-desktop-portal-gtk xdg-desktop-portal-wlr
 
     # --- System Utilities & Daemons ---
-    pacman-contrib rsync fastfetch polkit-gnome fwupd man-db cups ipp-usb ghostscript
+    pacman-contrib rsync fuse2 fastfetch polkit-gnome fwupd man-db cups ipp-usb ghostscript
 
     # --- Audio & Media ---
     pipewire pipewire-pulse wireplumber playerctl mpd mpv
