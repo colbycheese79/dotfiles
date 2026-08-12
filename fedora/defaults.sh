@@ -20,7 +20,7 @@ PACKAGES=(
     mpv playerctl
 
     # --- Gaming & Compatibility ---
-    wine lutris gamemode flatpak
+    wine gamemode flatpak
 
     # --- Core Desktop Apps & Shell ---
     firefox fish neovim geany galculator imv papers simple-scan
