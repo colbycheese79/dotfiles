@@ -51,16 +51,20 @@
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
-  # Enable CUPS to print documents.
+  # PRINTING
    services.printing.enable = true;
-
-  # Enable sound.
-  #services.pulseaudio.enable = true;
-  # OR
+   services.avahi = {
+     enable = true;
+     nssmdns4 = true;
+     openFirewall = true;
+   };
+  
+  # SOUND
    services.pipewire = {
      enable = true;
      pulse.enable = true;
    };
+
    nixpkgs.config.allowUnfree = true;
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -80,10 +84,11 @@
 	enable = true;
 	wrapperFeatures.gtk = true;
     };
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
+  
+
+  # PACKAGES
    environment.systemPackages = with pkgs; [
-     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+     neovim
      wget
      git
      fish
