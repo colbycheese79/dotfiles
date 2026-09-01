@@ -5,166 +5,100 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-  # Use the systemd-boot EFI boot loader.
+  # Bootloader & Kernel
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-
-  # Configure network connections interactively with nmcli or nmtui.
+  # Networking & Localization
   networking.networkmanager.enable = true;
-
-  hardware.graphics = {
-  enable = true;
-  enable32Bit = true; # for games
-};
-
-
-  # Set your time zone.
   time.timeZone = "America/Chicago";
+  i18n.defaultLocale = "en_US.UTF-8";
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # Hardware & Graphics
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # for games
+  };
 
-  # Select internationalisation properties.
-   i18n.defaultLocale = "en_US.UTF-8";
-#   console = {
-#     font = "Lat2-Terminus16";
-#     keyMap = "us";
-#    useXkbConfig = true; # use xkb.options in tty.
-#  };
+  # Services
+  services.gvfs.enable = true;
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
- services.gvfs.enable = true; 
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  services.gnome.gnome-keyring.enable = true;
 
-  # PRINTING
-   services.printing.enable = true;
-   services.avahi = {
-     enable = true;
-     nssmdns4 = true;
-     openFirewall = true;
-   };
-  
-  # SOUND
-   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
-   };
+  # Programs & Shell
+  nixpkgs.config.allowUnfree = true;
+  programs.fish.enable = true;
 
-   nixpkgs.config.allowUnfree = true;
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-   programs.fish.enable = true;
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.colby = {
-     isNormalUser = true;
-     shell = pkgs.fish;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       tree
-     ];
-   };
-    services.gnome.gnome-keyring.enable = true;
-  # programs.firefox.enable = true;
-    programs.sway = {
-	enable = true;
-	wrapperFeatures.gtk = true;
-    };
-  
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
 
-  # PACKAGES
-   environment.systemPackages = with pkgs; [
-     neovim
-     wget
-     git
-     fish
-     gh
-     brave
-     fuzzel
-     i3status
-     wl-clipboard
-     dunst
-     nwg-look
-     autotiling
-     lutris
-     gnome-themes-extra
-     papirus-icon-theme
-     thunar
-     thunar-volman
-     thunar-archive-plugin
-     papers
-     simple-scan
-     galculator
-     file-roller
-     geany
-     mpv
-     gvfs
-     wowup-cf
-     dxvk
-     wineWow64Packages.staging
-   ];
+  # User Account
+  users.users.colby = {
+    isNormalUser = true;
+    shell = pkgs.fish;
+    extraGroups = [ "wheel" ];
+    packages = with pkgs; [
+      tree
+    ];
+  };
 
+  # System Packages
+  environment.systemPackages = with pkgs; [
+    autotiling
+    brave
+    dunst
+    dxvk
+    file-roller
+    fish
+    fuzzel
+    galculator
+    geany
+    gh
+    git
+    gnome-themes-extra
+    gvfs
+    i3status
+    lutris
+    mpv
+    neovim
+    nwg-look
+    papirus-icon-theme
+    papers
+    simple-scan
+    thunar
+    thunar-archive-plugin
+    thunar-volman
+    wget
+    wineWow64Packages.staging
+    wl-clipboard
+    wowup-cf
+  ];
+
+  # File Systems
   fileSystems."/home/colby/backups" = {
-  device = "/dev/disk/by-uuid/85396fc7-c062-44c1-939b-22357c8e82fb";
-  fsType = "ext4"; # or "ntfs", "exfat", "auto", etc.
-  options = [ "nofail" "x-systemd.automount" ]; # Prevent boot failure if drive is missing
-};
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+    device = "/dev/disk/by-uuid/85396fc7-c062-44c1-939b-22357c8e82fb";
+    fsType = "ext4";
+    options = [ "nofail" "x-systemd.automount" ];
+  };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
-
-  # This option defines the first version of NixOS you have installed on this particular machine,
-  # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
-  #
-  # Most users should NEVER change this value after the initial install, for any reason,
-  # even if you've upgraded your system to a new NixOS release.
-  #
-  # This value does NOT affect the Nixpkgs version your packages and OS are pulled from,
-  # so changing it will NOT upgrade your system - see https://nixos.org/manual/nixos/stable/#sec-upgrading for how
-  # to actually do that.
-  #
-  # This value being lower than the current NixOS release does NOT mean your system is
-  # out of date, out of support, or vulnerable.
-  #
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "26.05"; # Did you read the comment?
-
+  # State Version
+  system.stateVersion = "26.05";
 }
-
