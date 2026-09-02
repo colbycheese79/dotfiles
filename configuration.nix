@@ -111,7 +111,7 @@
   fileSystems."/home/colby/backups" = {
     device = "/dev/disk/by-uuid/85396fc7-c062-44c1-939b-22357c8e82fb";
     fsType = "ext4";
-    options = [ "nofail" "x-systemd.automount" ];
+    options = [ "nofail" "rw" "relatime" ];
   };
 
   # State Version
