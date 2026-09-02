@@ -97,6 +97,7 @@
     nwg-look
     papirus-icon-theme
     papers
+    playerctl
     simple-scan
     thunar
     thunar-archive-plugin
